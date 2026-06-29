@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Comisiones · WGH Argentina</title>
+<meta name="description" content="Las comisiones de trabajo de Women in Global Health Argentina: Consulta, Coloquio, Comunidad y Alianza. Conocé cada una y el reglamento de funcionamiento." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+/* =====================================================================
+   WGH ARGENTINA · Portal de Comisiones (hub)
+   Acento hub: aqua #96D6DF (texto midnight en botones) · Base midnight
+   Las 4 comisiones conservan su color propio en las tarjetas.
+   ===================================================================== */
+:root{
+  --midnight:#0D2B35;
+  --aqua:#96D6DF;
+  --lime:#C8E535;
+  --gold:#F5A623;
+  --accent:#96D6DF;
+  --accent-soft:rgba(150,214,223,.18);
+  /* colores por comisión */
+  --c-consulta:#E8512A;
+  --c-coloquio:#C8E535;
+  --c-comunidad:#C2185B;
+  --c-alianza:#29B6D4;
+  --ink:#0D2B35;
+  --muted:#5a6a6f;
+  --line:#e6e9ea;
+  --bg-soft:#FCFAF9;
+  --footer-dark:#08222b;
+  --font:'Inter',system-ui,-apple-system,sans-serif;
+  --nav-h:70px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
+body{font-family:var(--font);color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{line-height:1.12;font-weight:800;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font);cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+ul{list-style:none}
+
+.section{padding:88px 0}
+.container{width:100%;max-width:1140px;margin:0 auto;padding:0 24px}
+.center{text-align:center}
+.eyebrow{font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.section-title{font-size:2.4rem;margin:12px 0 16px}
+.lead{font-size:1.12rem;color:var(--muted);max-width:720px}
+.lead.center{margin-left:auto;margin-right:auto}
+.text-muted{color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;padding:13px 26px;border-radius:30px;transition:transform .15s ease,background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease;border:2px solid transparent}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{width:18px;height:18px}
+.btn-accent{background:var(--accent);color:var(--midnight)}
+.btn-accent:hover{box-shadow:0 10px 24px var(--accent-soft)}
+.btn-dark{background:var(--midnight);color:#fff}
+.btn-lime{background:var(--lime);color:var(--midnight)}
+.btn-outline{background:transparent;color:var(--midnight);border-color:var(--midnight)}
+.btn-outline:hover{background:var(--midnight);color:#fff}
+.btn-outline-white{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+.btn-outline-white:hover{background:#fff;color:var(--midnight)}
+.btn-sm{padding:9px 18px;font-size:.85rem}
+
+.navbar{position:sticky;top:0;z-index:100;background:var(--midnight);height:var(--nav-h);display:flex;align-items:center}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;cursor:pointer}
+.brand-text{color:#fff;font-weight:700;font-size:1rem;letter-spacing:.01em}
+.brand-text b{color:var(--accent);font-weight:800}
+.brand-text span{display:block;font-weight:500;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--aqua);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{color:#fff;font-size:.9rem;font-weight:500;padding:8px 12px;border-radius:6px;transition:color .15s}
+.nav-link:hover{color:var(--accent)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-toggle{display:none;color:#fff}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90}
+.drawer{position:fixed;top:0;right:0;height:100%;width:80%;max-width:320px;background:var(--midnight);z-index:95;padding:24px;display:flex;flex-direction:column;gap:4px;box-shadow:-8px 0 30px rgba(0,0,0,.3)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.drawer .nav-link{padding:13px 8px;font-size:1rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.drawer .nav-actions{flex-direction:column;align-items:stretch;margin-top:16px}
+.drawer .btn{justify-content:center}
+
+.hero{position:relative;background:var(--midnight);color:#fff;overflow:hidden;padding:96px 0 100px;text-align:center}
+.hero::after{content:"";position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--accent) 0%,transparent 66%);opacity:.22;pointer-events:none}
+.hero .container{position:relative;z-index:1}
+.hero h1{font-size:3.3rem;font-weight:900;margin:18px 0 18px;line-height:1.05}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.sub{color:rgba(255,255,255,.85);font-size:1.18rem;max-width:640px;margin:0 auto}
+.hero-ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;justify-content:center}
+.tag-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;font-weight:600;font-size:.8rem;letter-spacing:.04em;padding:8px 16px;border-radius:24px}
+.tag-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* comisiones grid */
+.com-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
+.com-card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-top:5px solid var(--cc);border-radius:16px;padding:30px;transition:transform .18s ease,box-shadow .18s ease}
+.com-card:hover{transform:translateY(-5px);box-shadow:0 16px 38px rgba(13,43,53,.12)}
+.com-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.com-ico{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--cc) 14%,#fff);color:var(--cc);flex-shrink:0}
+.com-ico svg{width:26px;height:26px}
+.com-tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cc)}
+.com-card h3{font-size:1.4rem}
+.com-card .desc{color:var(--muted);font-size:.98rem;flex:1;margin-bottom:20px}
+.com-link{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-weight:700;color:var(--cc);font-size:.95rem}
+.com-link svg{width:17px;height:17px;transition:transform .15s}
+.com-card:hover .com-link svg{transform:translateX(4px)}
+
+/* reglamento */
+.regla{background:var(--bg-soft)}
+.regla-intro{max-width:760px}
+.regla-intro p{color:#39474c;margin-bottom:14px;font-size:1.04rem}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:8px}
+.rule{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.rule .chk{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--midnight);display:grid;place-items:center}
+.rule .chk svg{width:18px;height:18px}
+.rule h4{font-size:1.04rem;font-weight:700;margin-bottom:4px}
+.rule p{color:var(--muted);font-size:.93rem}
+.regla-note{margin-top:28px;background:var(--midnight);color:#fff;border-radius:16px;padding:34px 36px}
+.regla-note h3{font-size:1.4rem;margin-bottom:10px}
+.regla-note p{color:rgba(255,255,255,.86);max-width:780px}
+.regla-note p + p{margin-top:12px}
+.regla-note .heart{color:var(--c-comunidad)}
+
+.band{background:var(--midnight);color:#fff}
+.figures{display:grid;grid-template-columns:repeat(3,1fr)}
+.figure{padding:48px 24px;text-align:center;border-right:1px solid rgba(255,255,255,.12)}
+.figure:last-child{border-right:none}
+.figure .n{font-size:3rem;font-weight:900;color:var(--accent);line-height:1}
+.figure p{color:rgba(255,255,255,.82);font-size:.92rem;margin-top:10px;max-width:280px;margin-inline:auto}
+
+.closing{background:linear-gradient(135deg,var(--midnight),#13414f);color:#fff;text-align:center}
+.closing h2{font-size:2.4rem;margin-bottom:14px}
+.closing p{color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 28px;font-size:1.1rem}
+.closing-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+.footer{background:var(--footer-dark);color:#fff;padding:56px 0 28px}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:32px}
+.footer-brand p{color:rgba(255,255,255,.7);font-size:.92rem;max-width:300px;margin-top:12px}
+.footer h5{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--aqua);margin-bottom:14px;font-weight:700}
+.footer-col a{display:block;color:rgba(255,255,255,.78);padding:5px 0;font-size:.92rem}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:22px;color:rgba(255,255,255,.55);font-size:.84rem;text-align:center}
+
+@media(max-width:940px){
+  .nav-links,.nav-actions{display:none}
+  .nav-toggle{display:inline-flex}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .section{padding:60px 0}
+  .hero{padding:64px 0 72px}
+  .hero h1{font-size:2.4rem}
+  .section-title{font-size:1.9rem}
+  .com-grid,.rules,.figures{grid-template-columns:1fr}
+  .figure{border-right:none;border-bottom:1px solid rgba(255,255,255,.12)}
+  .figure:last-child{border-bottom:none}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container">
+    <a class="brand" href="#inicio">
+      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="var(--accent)" opacity="0.18" stroke="var(--accent)" stroke-width="1.5"/>
+        <g stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round">
+          <line x1="20" y1="20" x2="34" y2="20"/><line x1="20" y1="20" x2="32.1" y2="27"/>
+          <line x1="20" y1="20" x2="27" y2="32.1"/><line x1="20" y1="20" x2="20" y2="34"/>
+          <line x1="20" y1="20" x2="12.9" y2="32.1"/><line x1="20" y1="20" x2="7.9" y2="27"/>
+          <line x1="20" y1="20" x2="6" y2="20"/><line x1="20" y1="20" x2="7.9" y2="13"/>
+          <line x1="20" y1="20" x2="12.9" y2="7.9"/><line x1="20" y1="20" x2="20" y2="6"/>
+          <line x1="20" y1="20" x2="27" y2="7.9"/><line x1="20" y1="20" x2="32.1" y2="13"/>
+        </g>
+        <circle cx="20" cy="20" r="2.6" fill="var(--accent)"/>
+      </svg>
+      <span class="brand-text">WGH <b>Comisiones</b><span>Argentina</span></span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#comisiones">Las comisiones</a>
+      <a class="nav-link" href="#reglamento">Reglamento</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-outline-white btn-sm" href="https://www.womeningh.org" target="_blank" rel="noopener">Sitio WGH</a>
+      <a class="btn btn-accent btn-sm" href="#comisiones">Ver comisiones</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="inicio" class="hero">
+  <div class="container">
+    <span class="tag-pill"><span class="dot"></span> WGH Argentina · Equipos de trabajo</span>
+    <h1>Las comisiones que <em>construyen</em> la agenda</h1>
+    <p class="sub">Cuatro equipos de trabajo, comprometidos y orientados a la ejecución, que transforman el liderazgo de las mujeres en salud en evidencia, alianzas, comunidad y políticas públicas.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-accent" href="#comisiones">Conocé las comisiones</a>
+      <a class="btn btn-outline-white" href="#reglamento">Leé el reglamento</a>
+    </div>
+  </div>
+</header>
+
+<!-- COMISIONES -->
+<section id="comisiones" class="section">
+  <div class="container">
+    <p class="eyebrow">Nuestras comisiones</p>
+    <h2 class="section-title">Cuatro frentes, una misión</h2>
+    <p class="lead">Cada comisión tiene su propio foco, su identidad y su landing. Entrá a la que te interese para conocer su trabajo y cómo sumarte.</p>
+
+    <div class="com-grid">
+      <!-- CONSULTA -->
+      <a class="com-card" style="--cc:var(--c-consulta)" href="https://milicaro.github.io/consulta-wgh/" target="_blank" rel="noopener">
+        <div class="com-top">
+          <div class="com-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><div class="com-tag">Consulta</div><h3>Lo que las Mujeres Necesitan</h3></div>
+        </div>
+        <p class="desc">La consulta nacional que escucha a las mujeres de todo el país y construye el Mapa de Evidencia Nacional. Incluye toolkit de amplificación y programa de voceras.</p>
+        <span class="com-link">Ver landing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <!-- COLOQUIO -->
+      <a class="com-card" style="--cc:var(--c-coloquio)" href="https://milicaro.github.io/coloquio-wgh/" target="_blank" rel="noopener">
+        <div class="com-top">
+          <div class="com-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <div><div class="com-tag">Coloquio</div><h3>Coloquio de Líderes en Salud</h3></div>
+        </div>
+        <p class="desc">El encuentro de referencia del liderazgo en salud. 3ª edición el 24 de agosto en Paseo La Plaza. Ejes, consejo asesor y propuestas de sponsoreo.</p>
+        <span class="com-link">Ver landing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <!-- COMUNIDAD -->
+      <a class="com-card" style="--cc:var(--c-comunidad)" href="https://milicaro.github.io/comunidad-wgh/" target="_blank" rel="noopener">
+        <div class="com-top">
+          <div class="com-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="com-tag">Comunidad</div><h3>Tejiendo Redes</h3></div>
+        </div>
+        <p class="desc">El espacio de las socias: encuentros, mentoría con el Programa de Madrinas, agenda de eventos y el grupo privado de la red.</p>
+        <span class="com-link">Ver landing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <!-- ALIANZA -->
+      <a class="com-card" style="--cc:var(--c-alianza)" href="https://milicaro.github.io/alianza-wgh/" target="_blank" rel="noopener">
+        <div class="com-top">
+          <div class="com-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m17 11 2 2 4-4"/></svg></div>
+          <div><div class="com-tag">Alianza</div><h3>Alianza por la Salud de la Mujer</h3></div>
+        </div>
+        <p class="desc">La coalición de organizaciones que instala la salud de las mujeres como prioridad nacional y construye el Documento Nacional de Referencia.</p>
+        <span class="com-link">Ver landing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- REGLAMENTO -->
+<section id="reglamento" class="section regla">
+  <div class="container">
+    <p class="eyebrow">Pautas de funcionamiento</p>
+    <h2 class="section-title">Reglamento de las comisiones</h2>
+    <div class="regla-intro">
+      <p>Las comisiones de WGH Argentina son <strong>equipos pequeños, comprometidos y orientados a la ejecución</strong>. Antes de sumar integrantes y avanzar con la planificación, queremos compartir las pautas de funcionamiento comunes a todas las comisiones.</p>
+      <p>Quienes participan de una comisión aceptan los siguientes criterios:</p>
+    </div>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Asistencia</h4><p>Participar de al menos el 75% de las reuniones.</p></div>
+      </div>
+      <div class="rule">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Día y horario acordado</h4><p>Comprometerse con el día y horario que defina cada comisión. Quienes no puedan sostener ese horario, lamentablemente no podrán formar parte.</p></div>
+      </div>
+      <div class="rule">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Rol activo</h4><p>Tener un rol activo y una responsabilidad concreta dentro del proyecto. Todas las integrantes tendrán tareas asignadas y espacios de contribución definidos.</p></div>
+      </div>
+      <div class="rule">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Es una comisión de trabajo</h4><p>El objetivo es construir y ejecutar, no solamente participar de conversaciones o intercambios de opinión.</p></div>
+      </div>
+      <div class="rule">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Equipo operativo</h4><p>Buscamos equipos operativos, con un máximo aproximado de 8 integrantes, para facilitar la coordinación y la toma de decisiones.</p></div>
+      </div>
+      <div class="rule">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Roles distribuidos</h4><p>Nadie tiene que hacer todo. Distribuimos roles, responsabilidades y áreas de trabajo para que cada una aporte desde su experiencia y disponibilidad.</p></div>
+      </div>
+      <div class="rule" style="grid-column:1/-1">
+        <div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div><h4>Liderazgo que facilita</h4><p>La función del liderazgo es acompañar y facilitar el trabajo del equipo: dar seguimiento a los acuerdos, verificar el cumplimiento de las responsabilidades asumidas, ordenar procesos cuando sea necesario y apoyar la coordinación general. El liderazgo no implica concentrar las decisiones ni limitar la participación, sino contribuir a que el trabajo colectivo avance de manera organizada y efectiva.</p></div>
+      </div>
+    </div>
+
+    <div class="regla-note">
+      <h3>Una construcción colectiva 💜</h3>
+      <p>Queremos que cada comisión sea un espacio de confianza, compromiso, colaboración y muchísimo respeto por el tiempo que cada una aporta de manera voluntaria.</p>
+      <p>Si alguna siente que en este momento no puede asumir este nivel de participación, no pasa nada: habrá muchas otras oportunidades para sumarse más adelante.</p>
+      <p>Gracias por estar y por ayudar a construir algo que realmente puede generar impacto a nivel nacional. <span class="heart">💜</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<section class="band">
+  <div class="container" style="padding:0">
+    <div class="figures">
+      <div class="figure"><div class="n">4</div><p>comisiones de trabajo activas en WGH Argentina</p></div>
+      <div class="figure"><div class="n">~8</div><p>integrantes por comisión para un equipo operativo</p></div>
+      <div class="figure"><div class="n">75%</div><p>de asistencia mínima a las reuniones de cada comisión</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="section closing">
+  <div class="container">
+    <h2>¿Querés sumarte a una comisión?</h2>
+    <p>Elegí la comisión que más resuene con tu experiencia y disponibilidad, y conocé en su landing cómo participar.</p>
+    <div class="closing-ctas">
+      <a class="btn btn-accent" href="#comisiones">Ver las 4 comisiones</a>
+      <a class="btn btn-outline-white" href="#reglamento">Leer el reglamento</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-text" style="font-size:1.1rem">WGH <b>Argentina</b></span>
+        <p>Women in Global Health Argentina. Impulsamos el liderazgo de las mujeres en salud y políticas públicas basadas en evidencia.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Comisiones</h5>
+        <a href="https://milicaro.github.io/consulta-wgh/" target="_blank" rel="noopener">Consulta</a>
+        <a href="https://milicaro.github.io/coloquio-wgh/" target="_blank" rel="noopener">Coloquio</a>
+        <a href="https://milicaro.github.io/comunidad-wgh/" target="_blank" rel="noopener">Comunidad</a>
+        <a href="https://milicaro.github.io/alianza-wgh/" target="_blank" rel="noopener">Alianza</a>
+      </div>
+      <div class="footer-col">
+        <h5>Institucional</h5>
+        <a href="#reglamento">Reglamento de comisiones</a>
+        <a href="https://www.womeningh.org" target="_blank" rel="noopener">WGH Global</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Women in Global Health Argentina · Comisiones. Hecho con 💜 por la red.</div>
+  </div>
+</footer>
+
+<script>
+/* mobile drawer */
+document.getElementById('navToggle').addEventListener('click',()=>{
+  const bd=document.createElement('div'); bd.className='drawer-backdrop';
+  const dr=document.createElement('div'); dr.className='drawer';
+  dr.innerHTML=`
+    <div class="drawer-head">
+      <span class="brand-text">WGH <b>Comisiones</b></span>
+      <button id="drClose" style="color:#fff"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <a class="nav-link" href="#comisiones">Las comisiones</a>
+    <a class="nav-link" href="#reglamento">Reglamento</a>
+    <div class="nav-actions">
+      <a class="btn btn-outline-white" href="https://www.womeningh.org" target="_blank" rel="noopener">Sitio WGH</a>
+      <a class="btn btn-accent" href="#comisiones">Ver comisiones</a>
+    </div>`;
+  document.body.append(bd,dr);
+  const close=()=>{bd.remove();dr.remove()};
+  bd.onclick=close; dr.querySelector('#drClose').onclick=close;
+  dr.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+});
+</script>
+</body>
+</html>
